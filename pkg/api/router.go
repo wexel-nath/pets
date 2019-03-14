@@ -29,5 +29,10 @@ func getPaths() []path {
 			pattern: "/healthz",
 			handler: healthzHandler,
 		},
+		{
+			method:  http.MethodPost,
+			pattern: "/user",
+			handler: createUserHandler,
+		},
 	}
 }

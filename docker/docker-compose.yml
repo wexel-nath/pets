@@ -6,10 +6,10 @@ services:
     depends_on:
       - db
     environment:
-      CONTINUANCE_DB_HOST: 'db'
-      CONTINUANCE_DB_USER: 'postgres'
-      CONTINUANCE_DB_NAME: 'pets'
-      CONTINUANCE_DB_PASS: ''
+      PETS_DB_HOST: 'db'
+      PETS_DB_USER: 'postgres'
+      PETS_DB_NAME: 'pets'
+      PETS_DB_PASS: ''
 
   db:
     image: postgres

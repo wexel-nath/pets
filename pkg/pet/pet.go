@@ -14,6 +14,7 @@ type Pet struct {
 	ID        int64
 	Category  Category
 	Name      string
-	PhotoURLs map[string]interface{}
+	PhotoURLs []map[string]interface{}
+	Tags      []Tag
 	Status    string
 }

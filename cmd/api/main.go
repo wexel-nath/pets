@@ -6,9 +6,14 @@ import (
 	"net/http"
 
 	"github.com/wexel-nath/pets/pkg/api"
+	"github.com/wexel-nath/pets/pkg/config"
+	"github.com/wexel-nath/pets/pkg/database"
 )
 
 func main() {
+	config.Configure()
+	database.GetConnection()
+
 	startServer()
 }
 
