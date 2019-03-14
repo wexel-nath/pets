@@ -1,0 +1,16 @@
+version: '3'
+services:
+
+  api:
+    image: pets-api:latest
+    depends_on:
+      - db
+    environment:
+      CONTINUANCE_DB_HOST: 'db'
+      CONTINUANCE_DB_USER: 'postgres'
+      CONTINUANCE_DB_NAME: 'pets'
+      CONTINUANCE_DB_PASS: ''
+
+  db:
+    image: postgres
+    restart: unless-stopped
