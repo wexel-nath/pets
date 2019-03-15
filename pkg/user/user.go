@@ -1,14 +1,14 @@
 package user
 
 type User struct {
-	ID         int64
-	Username   string
-	FirstName  string
-	LastName   string
-	Email      string
-	Password   string
-	Phone      string
-	Status     int64
+	ID        int64  `json:"id"`
+	Username  string `json:"username"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+	Phone     string `json:"phone"`
+	Status    int64  `json:"userStatus"`
 }
 
 func NewUser(row map[string]interface{}) User {

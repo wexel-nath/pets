@@ -13,5 +13,5 @@ VALUES
 (10, 'placed'),
 (20, 'approved'),
 (30, 'delivered')
-ON CONFLICT (pet_status_id)
+ON CONFLICT (order_status_id)
 DO NOTHING;

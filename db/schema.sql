@@ -1,8 +1,9 @@
 -- Pets Schema
 
 CREATE TABLE IF NOT EXISTS pet_category (
-  pet_category_id   INTEGER PRIMARY KEY NOT NULL,
-  pet_category_name TEXT    NOT NULL
+  pet_category_id   SERIAL PRIMARY KEY NOT NULL,
+  pet_category_name TEXT    NOT NULL,
+  UNIQUE(pet_category_name)
 );
 
 CREATE TABLE IF NOT EXISTS pet_status (
@@ -14,7 +15,9 @@ CREATE TABLE IF NOT EXISTS pet (
   pet_id          SERIAL  PRIMARY KEY NOT NULL,
   pet_name        TEXT    NOT NULL,
   pet_category_id INTEGER NOT NULL REFERENCES pet_category(pet_category_id),
-  pet_tags        JSONB   NOT NULL
+  pet_photo_urls  JSONB   NOT NULL,
+  pet_tags        JSONB   NOT NULL,
+  pet_status_id   INTEGER NOT NULL REFERENCES pet_status(pet_status_id)
 );
 
 CREATE TABLE IF NOT EXISTS "user" (

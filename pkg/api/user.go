@@ -11,43 +11,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-type UserApiModel struct {
-	ID        int64  `json:"id"`
-	Username  string `json:"username"`
-	FirstName string `json:"firstName"`
-	LastName  string `json:"lastName"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
-	Phone     string `json:"phone"`
-	Status    int64  `json:"userStatus"`
-}
-
-func NewUserApiModel(u user.User) UserApiModel {
-	return UserApiModel{
-		ID:        u.ID,
-		Username:  u.Username,
-		FirstName: u.FirstName,
-		LastName:  u.LastName,
-		Email:     u.Email,
-		Password:  u.Password,
-		Phone:     u.Phone,
-		Status:    u.Status,
-	}
-}
-
-func (model UserApiModel) ToUser() user.User {
-	return user.User{
-		ID:        model.ID,
-		Username:  model.Username,
-		FirstName: model.FirstName,
-		LastName:  model.LastName,
-		Email:     model.Email,
-		Password:  model.Password,
-		Phone:     model.Phone,
-		Status:    model.Status,
-	}
-}
-
 func createUserHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	body, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
@@ -57,22 +20,22 @@ func createUserHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Para
 		return
 	}
 
-	var model UserApiModel
-	err = json.Unmarshal(body, &model)
+	var userModel user.User
+	err = json.Unmarshal(body, &userModel)
 	if err != nil {
 		logger.Error(err)
 		response(w, http.StatusBadRequest, nil, err.Error())
 		return
 	}
 
-	u, err := user.Insert(model.ToUser())
+	newUser, err := user.Insert(userModel)
 	if err != nil {
 		logger.Error(err)
 		response(w, http.StatusInternalServerError, nil, err.Error())
 		return
 	}
 
-	response(w, http.StatusCreated, NewUserApiModel(u), "")
+	response(w, http.StatusCreated, newUser, "")
 }
 
 func createUserWithArrayHandler(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
